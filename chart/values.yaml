@@ -1,0 +1,5 @@
+certificate:
+  enabled: false
+reportportal:
+  minio:
+    install: false

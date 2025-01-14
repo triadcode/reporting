@@ -1,0 +1,66 @@
+certificate:
+    enabled: true
+    secretName: reportportal-certificate
+    issuerRef:
+        name: cert-manager-prod-cluster-issuer
+        kind: ClusterIssuer
+reportportal:
+    ingress:
+        hosts: reportportal.dev.sdelements.com
+        class: shared-ingress-nginx
+        annotations:
+            nginx:
+                nginx.ingress.kubernetes.io/whitelist-source-range: 184.107.119.220/32,54.160.23.69/32,207.107.96.210/32,206.253.143.2/32,3.97.18.116/32,34.198.218.40/32,34.201.84.106/32,3.97.61.230/32,34.237.49.7/32,184.107.11.180/32,184.107.11.184/32,184.107.11.185/32
+        tls:
+            certificates:
+                - hosts:
+                    - reportportal.dev.sdelements.com
+                  secretName: reportportal-certificate
+    storage:
+        type: s3
+        accesskey: ASDIAQAVREQTRYGNQHJYT
+        secretkey: gANNA39udfdqsdj808e6JK3nb7ugsd
+        region: ca-central-1
+        bucket:
+            type: single
+            bucketDefaultName: sde-dev-reportportal
+    uat:
+        superadminInitPasswd:
+            password: uatPassword
+    database:
+        password: dbPassword
+        port: 5432
+        user: postgres
+        dbName: reportportal
+        connections: ""
+    postgresql:
+        auth:
+            postgresPassword: dbPassword
+            username: postgres
+            password: dbPassword
+            database: reportportal
+        primary:
+            service: null
+            ports:
+                postgresql: 5432
+    msgbroker:
+        password: brokerPassword
+        port: 5672
+        user: rabbitmq
+        apiport: 15672
+        apiuser: null
+    rabbitmq:
+        auth:
+            username: rabbitmq
+            password: brokerPassword
+        containerPorts:
+            amqp: 5672
+            manager: 15672
+    searchengine:
+        port: 9200
+    opensearch:
+        httpPort: 9200
+    minio:
+        auth:
+            rootUser: ASDIAQAVREQTRYGNQHJYT
+            rootPassword: gANNA39udfdqsdj808e6JK3nb7ugsd
