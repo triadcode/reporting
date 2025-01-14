@@ -13,9 +13,8 @@ spec:
       releaseName: reportportal
       valueFiles:
         - values.yaml
-        - values-reportportal.yaml
-        #- ../../deployments/dev/sc-service-yul/values.reportportal.yaml
-    path: chart
+        - ../../deployments/dev/sc-service-yul/values.reportportal.yaml
+    path: charts/reportportal
     repoURL: https://github.com/triadcode/reporting
     targetRevision: HEAD
   syncPolicy:
