@@ -10,12 +10,12 @@ spec:
   project: default
   source:
     helm:
-#       releaseName: reportportal
+      releaseName: reportportal
       valueFiles:
         - values.yaml
         - values-reportportal.yaml
         #- ../../deployments/dev/sc-service-yul/values.reportportal.yaml
-    path: charts/reportportal
+    path: chart
     repoURL: https://github.com/triadcode/reporting
     targetRevision: HEAD
   syncPolicy:
@@ -24,4 +24,3 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-      - PruneLast=true
