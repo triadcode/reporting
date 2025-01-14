@@ -10,10 +10,11 @@ spec:
   project: default
   source:
     helm:
-      releaseName: reportportal
+#       releaseName: reportportal
       valueFiles:
         - values.yaml
-        - ../../deployments/dev/sc-service-yul/values.reportportal.yaml
+        - values-reportportal.yaml
+        #- ../../deployments/dev/sc-service-yul/values.reportportal.yaml
     path: charts/reportportal
     repoURL: https://github.com/triadcode/reporting
     targetRevision: HEAD
