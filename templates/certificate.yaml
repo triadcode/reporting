@@ -1,0 +1,25 @@
+{{- if ( default false .Values.certificate.enabled ) }}
+{{- $appConfig := index .Values "sorry-cypress" -}}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ .Release.Name }}-certificate
+  namespace: {{ .Release.NameSpace }}
+spec:
+  dnsNames:
+  {{- range $appConfig.api.ingress.hosts }}
+  - {{ .host }}
+  {{- end}}
+  {{- range $appConfig.dashboard.ingress.hosts }}
+  - {{ .host }}
+  {{- end}}
+  {{- range $appConfig.director.ingress.hosts }}
+  - {{ .host }}
+  {{- end}}
+  secretName: {{ required "'secretName' must be defined for certificate" .Values.certificate.secretName }}
+  {{- if .Values.certificate.issuerRef }}
+  issuerRef:
+{{ toYaml .Values.certificate.issuerRef | nindent 4 }}
+  {{- end }}
+{{- end }}
